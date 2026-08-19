@@ -6,7 +6,7 @@ import { CgProfile } from "react-icons/cg";
 import { PiShoppingCartBold } from "react-icons/pi";
 import { userDataContext } from "../context/UserContext.jsx";
 import axios from "axios";
-import { authDataContext } from "../context/authContext";
+import { authDataContext } from "../context/AuthContext";
 import { MdHome, MdOutlineCollections, MdContacts } from "react-icons/md";
 import { shopDataContext } from "../context/ShopContext.jsx";
 
