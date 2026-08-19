@@ -11,7 +11,7 @@ import About from './pages/About'
 import Collection from './pages/Collection'
 import Contact from './pages/Contact'
 import Product from './pages/Product'
-import ProductDetails from './pages/productDetails'
+import ProductDetails from "./pages/ProductDetails";
 import Cart from './pages/Cart'
 import PlaceOrder from './pages/PlaceOrder'
 import Order from './pages/Order'
