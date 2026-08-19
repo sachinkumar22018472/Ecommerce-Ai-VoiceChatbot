@@ -25,7 +25,7 @@ app.use(
     cors({
         origin: [
             "https://ecommerce-ai-voicechatbotfrontend.onrender.com",
-            "http://localhost:5174"
+            "https://ecommerce-ai-voicechatbotadmin.onrender.com"
         ],
         credentials: true
     })
