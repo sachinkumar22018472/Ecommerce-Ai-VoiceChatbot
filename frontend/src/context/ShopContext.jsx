@@ -4,7 +4,7 @@ import React, {
     useState,
     useEffect
 } from "react";
-import { authDataContext } from "./authContext";
+import { authDataContext } from "./AuthContext";
 import axios from "axios";
 import { userDataContext } from "./UserContext";
 
