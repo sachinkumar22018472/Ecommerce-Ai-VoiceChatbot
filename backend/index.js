@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use(
     cors({
         origin: [
-            "http://localhost:5173",
+            "https://ecommerce-ai-voicechatbotfrontend.onrender.com",
             "http://localhost:5174"
         ],
         credentials: true
