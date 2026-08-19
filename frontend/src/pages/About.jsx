@@ -1,7 +1,7 @@
 import React from 'react'
 import Title from '../components/Title'
 import about from '../assets/about.png'
-import NewLetterBox from '../components/newLetterBox'
+import NewLetterBox from "../components/NewLetterBox";
 import Footer from '../components/Footer'
 
 function About() {
