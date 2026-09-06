@@ -24,8 +24,8 @@ app.use(cookieParser());
 app.use(
     cors({
         origin: [
-            "https://ecommerce-ai-voicechatbotfrontend.onrender.com",
-            "https://ecommerce-ai-voicechatbotadmin.onrender.com"
+            "https://ecommerce-ai-voice-chatbot.vercel.app",
+            "https://ecommerce-ai-voice-chatbot-jt97.vercel.app"
         ],
         credentials: true
     })
