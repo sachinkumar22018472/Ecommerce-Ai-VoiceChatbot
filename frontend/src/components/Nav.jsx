@@ -11,7 +11,7 @@ import { MdHome, MdOutlineCollections, MdContacts } from "react-icons/md";
 import { shopDataContext } from "../context/ShopContext.jsx";
 
 function Nav() {
-  const { getCurrentUser, userData } = useContext(userDataContext);
+  const { getCurrentUser, userData, setUserData } = useContext(userDataContext);
   let { serverUrl } = useContext(authDataContext);
 
   const {
@@ -61,6 +61,7 @@ function Nav() {
   const handleLogout = async () => {
     try {
       localStorage.removeItem("token");
+      setUserData(null);
       const result = await axios.get(serverUrl + "/api/auth/logout", {
         withCredentials: true,
       });
@@ -72,6 +73,8 @@ function Nav() {
       navigate("/login");
     } catch (error) {
       console.log(error);
+      setUserData(null);
+      navigate("/login");
     }
   };
 

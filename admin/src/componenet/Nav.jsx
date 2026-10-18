@@ -3,15 +3,18 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import axios from "axios";
 import { authDataContext } from "../context/AuthContext";
+import { adminDataContext } from "../context/AdminContext";
 import { MdLogout } from "react-icons/md";
 
 function Nav() {
   const { serverUrl } = useContext(authDataContext);
+  const { setAdminData } = useContext(adminDataContext);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       localStorage.removeItem("adminToken");
+      setAdminData(null);
       await axios.get(`${serverUrl}/api/auth/logout`, {
         withCredentials: true,
       });
@@ -19,6 +22,8 @@ function Nav() {
       navigate("/login");
     } catch (error) {
       console.log(error);
+      setAdminData(null);
+      navigate("/login");
     }
   };
 
