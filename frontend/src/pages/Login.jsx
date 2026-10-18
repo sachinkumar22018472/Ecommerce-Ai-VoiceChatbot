@@ -39,7 +39,12 @@ function Login() {
       );
 
       console.log(result.data);
-      getCurrentUser();
+      if (result.data.token) {
+        localStorage.setItem("token", result.data.token);
+      }
+      if (getCurrentUser) {
+        await getCurrentUser();
+      }
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -62,7 +67,12 @@ function Login() {
         { withCredentials: true }
       );
       console.log(result.data);
-      getCurrentUser();
+      if (result.data.token) {
+        localStorage.setItem("token", result.data.token);
+      }
+      if (getCurrentUser) {
+        await getCurrentUser();
+      }
       navigate("/");
     } catch (error) {
       console.log(error);

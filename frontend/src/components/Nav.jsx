@@ -60,11 +60,14 @@ function Nav() {
 
   const handleLogout = async () => {
     try {
+      localStorage.removeItem("token");
       const result = await axios.get(serverUrl + "/api/auth/logout", {
         withCredentials: true,
       });
       console.log(result.data);
-      await getCurrentUser();
+      if (getCurrentUser) {
+        await getCurrentUser();
+      }
       setShowProfile(false);
       navigate("/login");
     } catch (error) {

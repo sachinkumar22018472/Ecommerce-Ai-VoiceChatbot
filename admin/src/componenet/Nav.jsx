@@ -11,6 +11,7 @@ function Nav() {
 
   const handleLogout = async () => {
     try {
+      localStorage.removeItem("adminToken");
       await axios.get(`${serverUrl}/api/auth/logout`, {
         withCredentials: true,
       });

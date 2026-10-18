@@ -44,15 +44,18 @@ export const registration = async (req, res) => {
 
     const token = await genToken(user._id);
 
-    res.cookie("token", token, {
+    const cookieOptions = {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
+    };
+
+    res.cookie("token", token, cookieOptions);
 
     return res.status(201).json({
       success: true,
+      token,
       user: {
         _id: user._id,
         name: user.name,
@@ -94,15 +97,18 @@ export const login = async (req, res) => {
 
     const token = await genToken(user._id);
 
-    res.cookie("token", token, {
+    const cookieOptions = {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
+    };
+
+    res.cookie("token", token, cookieOptions);
 
     return res.status(200).json({
       success: true,
+      token,
       user: {
         _id: user._id,
         name: user.name,
@@ -135,15 +141,18 @@ export const googleLogin = async (req, res) => {
 
     const token = await genToken(user._id);
 
-    res.cookie("token", token, {
+    const cookieOptions = {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
+    };
+
+    res.cookie("token", token, cookieOptions);
 
     return res.status(200).json({
       success: true,
+      token,
       user,
     });
   } catch (error) {
@@ -158,7 +167,11 @@ export const googleLogin = async (req, res) => {
 // ================= LOGOUT =================
 export const logOut = async (req, res) => {
   try {
-    res.clearCookie("token");
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
 
     return res.status(200).json({
       success: true,
@@ -189,19 +202,18 @@ export const adminLogin = async (req, res) => {
 
       res.cookie("token", token, {
         httpOnly: true,
-        secure: false,
-        sameSite: "Strict",
+        secure: true,
+        sameSite: "none",
         maxAge: 24 * 60 * 60 * 1000,
       });
 
-      // 👇 YEH LINE ADD KARO
       return res.status(200).json({
         success: true,
+        token,
         message: "Admin Login Successful",
       });
     }
 
-    // 👇 Agar login galat ho tab yeh chalega
     return res.status(401).json({
       success: false,
       message: "Invalid Credentials",

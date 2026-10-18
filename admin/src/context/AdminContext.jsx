@@ -13,16 +13,31 @@ function AdminContext({children}) {
 
 
     const getAdmin = async () => {
-      try {
-        let result = await axios.get(serverUrl + "/api/user/getadmin", {withCredentials:true})
-
-        setAdminData(result.data)
-        console.log(result.data)
-      } catch (error) {
-        setAdminData(null)
-        console.log(error)
+      const adminToken = localStorage.getItem("adminToken");
+      if (!adminToken) {
+        setAdminData(null);
+        return;
       }
-    }
+
+      try {
+        let result = await axios.get(serverUrl + "/api/user/getadmin", {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${adminToken}`
+          }
+        });
+
+        setAdminData(result.data);
+        console.log(result.data);
+      } catch (error) {
+        setAdminData(null);
+        if (error.response?.status === 401 || error.response?.status === 400) {
+          localStorage.removeItem("adminToken");
+        } else {
+          console.log(error);
+        }
+      }
+    };
 
 
     useEffect(() => {

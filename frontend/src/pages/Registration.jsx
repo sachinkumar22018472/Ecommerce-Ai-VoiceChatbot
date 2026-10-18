@@ -63,6 +63,9 @@ function Registration() {
       );
       
       console.log(result.data);
+      if (result.data.token) {
+        localStorage.setItem("token", result.data.token);
+      }
       if (getCurrentUser) {
         await getCurrentUser();
       }

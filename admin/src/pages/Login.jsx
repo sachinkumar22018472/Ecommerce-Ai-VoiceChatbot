@@ -38,8 +38,11 @@ function Login() {
       );
 
       if (result.data.success) {
+        if (result.data.token) {
+          localStorage.setItem("adminToken", result.data.token);
+        }
         toast.success(result.data.message || "Admin Login Successfully!");
-        if (getAdmin) getAdmin();
+        if (getAdmin) await getAdmin();
         
         // Brief delay before redirect so user sees the success toast
         setTimeout(() => {

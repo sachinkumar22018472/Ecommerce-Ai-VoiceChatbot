@@ -3,7 +3,7 @@ import React, { createContext } from 'react'
 export const authDataContext = createContext()
 
 function AuthContext({children}) {
-    let serverUrl = "https://ecommerce-ai-voicechatbotbackend.onrender.com"
+    let serverUrl = import.meta.env.VITE_SERVER_URL || "https://ecommerce-ai-voicechatbotbackend.onrender.com"
     let value  = {
         serverUrl
     }

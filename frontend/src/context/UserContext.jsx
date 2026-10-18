@@ -16,12 +16,21 @@ function UserContext({ children }) {
 
   const getCurrentUser = async () => {
     if (!serverUrl) return;
-    
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setUserData(null);
+      return;
+    }
+
     try {
       const result = await axios.get(
         `${serverUrl}/api/user/getcurrentuser`,
         {
           withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
         }
       );
 
@@ -29,7 +38,11 @@ function UserContext({ children }) {
       console.log(result.data);
     } catch (error) {
       setUserData(null);
-      console.log(error);
+      if (error.response?.status === 401 || error.response?.status === 400) {
+        localStorage.removeItem("token");
+      } else {
+        console.log(error);
+      }
     }
   };
 

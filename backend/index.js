@@ -21,20 +21,38 @@ app.use(express.json());
 app.use(cookieParser());
 
 // CORS
+const allowedOrigins = [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://localhost:3000",
+    "https://ecommerce-ai-voice-chatbot-ltph.vercel.app",
+    "https://ecommerce-ai-voice-chatbot.vercel.app",
+    "https://ecommerce-ai-voice-chatbot-jt97.vercel.app"
+];
 
 app.use(
     cors({
-        origin: [
-            "https://ecommerce-ai-voice-chatbot-ltph.vercel.app",
-            "https://ecommerce-ai-voice-chatbot.vercel.app",
-            "https://ecommerce-ai-voice-chatbot-jt97.vercel.app"
-        ],
-        credentials: true
+        origin: function (origin, callback) {
+            if (!origin) return callback(null, true);
+            if (
+                allowedOrigins.includes(origin) ||
+                origin.endsWith(".vercel.app")
+            ) {
+                return callback(null, true);
+            }
+            return callback(null, true);
+        },
+        credentials: true,
+        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        allowedHeaders: ["Content-Type", "Authorization", "token"]
     })
 );
 
 
 // Routes
+app.get("/", (req, res) => {
+    res.send("Backend Server is Running Successfully");
+});
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/product", productRoutes);
