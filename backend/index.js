@@ -21,15 +21,18 @@ app.use(express.json());
 app.use(cookieParser());
 
 // CORS
+
 app.use(
     cors({
         origin: [
+            "https://ecommerce-ai-voice-chatbot-ltph.vercel.app",
             "https://ecommerce-ai-voice-chatbot.vercel.app",
             "https://ecommerce-ai-voice-chatbot-jt97.vercel.app"
         ],
         credentials: true
     })
 );
+
 
 // Routes
 app.use("/api/auth", authRoutes);
